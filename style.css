@@ -84,9 +84,7 @@ body {
 .logo span {
   color: var(--accent);
 }
-#fo {
-  align-items: right;
-}
+
 /* Social Icons Layout */
 .social-links {
   display: flex;
