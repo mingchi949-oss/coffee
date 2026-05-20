@@ -157,7 +157,53 @@ body {
   outline: none;
   border-color: var(--accent);
 }
+/* Container styling for a neat horizontal layout */
+#brand-list-container {
+  display: flex;
+  gap: 12px;
+  padding: 15px 5px;
+  overflow-x: auto; /* Allows smooth scrolling on mobile if items overflow */
+  white-space: nowrap;
+}
 
+/* Base button style */
+.brand-item {
+  display: inline-block;
+  padding: 10px 22px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #555;
+  background-color: #f5f5f7;
+  border: 1px solid #e5e5ea;
+  border-radius: 30px; /* Pill-shaped */
+  cursor: pointer;
+  transition: all 0.25s ease; /* Makes animations smooth */
+  user-select: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+/* Hover Effect: Gentle lift & shadow */
+.brand-item:hover {
+  color: #000;
+  background-color: #fff;
+  border-color: #b0b0b5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Click Effect: Tiny press down feel */
+.brand-item:active {
+  transform: translateY(0);
+}
+
+/* Active State: The look when selected */
+.brand-item.active {
+  color: #fff;
+  background-color: #1c1c1e; /* Sleek dark neutral */
+  border-color: #1c1c1e;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
 @media (max-width: 850px) {
   .shop-layout {
     flex-direction: column;
