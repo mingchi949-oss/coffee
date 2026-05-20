@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MinG Coffee</title>
+    <link rel="stylesheet" href="./style.css" />
+       <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    
+    <div id="main-shop">
+      <nav class="main-nav">
+        <div class="logo">MING<span>COFFEE</span></div>
+    
+        <div class="social-links">
+          <a href="https://facebook.com" target="_blank" class="social-icon fb"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+          <a href="https://t.me" target="_blank" class="social-icon tg"
+            ><i class="fab fa-telegram-plane"></i
+          ></a>
+          <a href="https://instagram.com" target="_blank" class="social-icon ig"
+            ><i class="fab fa-instagram"></i
+          ></a>
+        </div>
+      </nav>
+      <div class="shop-layout">
+        <aside class="brand-sidebar">
+          <h3>Search</h3>
+          <input
+            type="text"
+            id="brandSearch"
+            onkeyup="searchBrandsAll()"
+            placeholder="Search (e.g. Matcha...)"
+          />
+          <div id="brand-list-container">
+            <!--search-->
+     
+            <div class="brand-item" id="btn-Matcha" onclick="setSearchAndFilter('Matcha')">Matcha</div>
+            <div class="brand-item" id="btn-Coffee" onclick="setSearchAndFilter('Coffee')">Coffee</div>
+            <div class="brand-item" id="btn-Tea" onclick="setSearchAndFilter('Tea')">Tea</div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!--here-->
+    <main>
+      <div class="moto-gallery product-card">
+        <!-- Added class "img-container" here -->
+        <div class="img-container"> 
+          <span class="badge hot-sale">HOT</span>
+          <img src=".//Photo/Matcha.jpg" alt="Moto">
+        </div>
+        
+        <h1>Matcha Latte</h1>
+        <p>$1.25</p>
+        
+        <a href="https://wa.me/85512345678" target="_blank" class="buy-btn" style="text-decoration: none; display: inline-block">
+          CHAT TO BUY
+        </a>
+      </div>
+      
+      <div class="moto-gallery product-card">
+       <div >
+            <img src="./Photo/matcha stt.jpg" alt="Moto">
+       
+        </div>
+  
+        <h1>Strawberry Matcha</h1>
+        <p>$2.50</p>
+  
+        <a
+          href="https://wa.me/85512345678"
+          target="_blank"
+          class="buy-btn"
+          style="text-decoration: none; display: inline-block"
+        >
+          CHAT TO BUY
+        </a>
+      </div>
+     <div class="moto-gallery product-card">
+        <!-- Added class "img-container" here -->
+        <div class="img-container"> 
+          <span class="badge hot-sale">HOT</span>
+          <img src="./Photo/ice latte.jpg" alt="Moto">
+        </div>
+        
+        <h1>Ice latte Coffee</h1>
+        <p>$1.25</p>
+        
+        <a href="https://wa.me/85512345678" target="_blank" class="buy-btn" style="text-decoration: none; display: inline-block">
+          CHAT TO BUY
+        </a>
+      </div>
+       <div class="moto-gallery product-card">
+       <div >
+            <img src="./Photo/americano coffee.jpg" alt="Moto">
+       
+        </div>
+  
+        <h1>Ice Americano coffee</h1>
+        <p>$1.25</p>
+  
+        <a
+          href="https://wa.me/85512345678"
+          target="_blank"
+          class="buy-btn"
+          style="text-decoration: none; display: inline-block"
+        >
+          CHAT TO BUY
+        </a>
+      </div>
+<div class="moto-gallery product-card">
+       <div >
+            <img src="./Photo/lemom tea.jpg" alt="Moto">
+       
+        </div>
+  
+        <h1>Lemon Tea</h1>
+        <p>$1.25</p>
+  
+        <a
+          href="https://wa.me/85512345678"
+          target="_blank"
+          class="buy-btn"
+          style="text-decoration: none; display: inline-block"
+        >
+          CHAT TO BUY
+        </a>
+      </div>
+<div class="moto-gallery product-card">
+       <div >
+            <img src="./Photo/tea lemon.jpg" alt="Moto">
+       
+        </div>
+        <h1>Lemon Tea</h1>
+        <p>$1.25</p>
+  
+        <a
+          href="https://wa.me/85512345678"
+          target="_blank"
+          class="buy-btn"
+          style="text-decoration: none; display: inline-block"
+        >
+          CHAT TO BUY
+        </a>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!--text wrong-->
+<div id="intro-screen">
+    <div class="glitch-wrapper">
+        <h1 class="glitch-text">Chill With Me</h1>
+        <p class="sub-text">Have a Good Day</p>
+        
+
+        <button class="bypass-btn" onclick="closeError()">Click Enter to Buy</button>
+    </div>
+    </main>
+
+    <script src="./web.js"></script>
+  </body>
+</html>
