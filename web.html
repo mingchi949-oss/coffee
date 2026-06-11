@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>MinG Coffee</title>
-    <link rel="stylesheet" href="./style.css" />
-       <link
+    <title>Wolcome to MING Coffee</title>
+    <link rel="stylesheet" href=".//webstyle.css" />
+    <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap"
       rel="stylesheet"
     />
@@ -14,14 +14,25 @@
     />
   </head>
   <body>
-    
     <div id="main-shop">
       <nav class="main-nav">
         <div class="logo">MING<span>COFFEE</span></div>
-    
+        <div class="logo">WEL<span>COME</span></div>
         <div class="social-links">
-          <a href="https://facebook.com" target="_blank" class="social-icon fb"
-            ><i class="fab fa-facebook-f"></i
+          <a
+            href="./order.html"
+            class="social-icon"
+            style="
+              width: auto;
+              padding: 0 15px;
+              border-radius: 20px;
+              text-decoration: none;
+            "
+          >
+            <i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span>
+          </a>
+          <a href="https://facebook.com" target="_blank" class="social-icon fb">
+            <i class="fab fa-facebook-f"></i
           ></a>
           <a href="https://t.me" target="_blank" class="social-icon tg"
             ><i class="fab fa-telegram-plane"></i
@@ -29,155 +40,273 @@
           <a href="https://instagram.com" target="_blank" class="social-icon ig"
             ><i class="fab fa-instagram"></i
           ></a>
+          <a
+            href="https://www.tiktok.com"
+            target="_blank"
+            class="social-icon tt"
+          >
+            <i class="fab fa-tiktok"></i>
+          </a>
         </div>
       </nav>
       <div class="shop-layout">
         <aside class="brand-sidebar">
+          <!--search-->
           <h3>Search</h3>
-          <input
-            type="text"
-            id="brandSearch"
-            onkeyup="searchBrandsAll()"
-            placeholder="Search (e.g. Matcha...)"
-          />
+          <div style="position: relative">
+            <input
+              type="text"
+              id="brandSearch"
+              onkeyup="searchBrandsAll()"
+              placeholder="Search (e.g. Matcha...)"
+              style="padding-right: 35px"
+            />
+            <span
+              id="clear-search-btn"
+              onclick="clearSearch()"
+              style="
+                position: absolute;
+                right: 10px;
+                top: 8px;
+                cursor: pointer;
+                color: #888;
+                font-size: 1.5rem;
+                display: none;
+                user-select: none;
+              "
+              >&times;</span
+            >
+          </div>
           <div id="brand-list-container">
-            <!--search-->
-     
-            <div class="brand-item" id="btn-Matcha" onclick="setSearchAndFilter('Matcha')">Matcha</div>
-            <div class="brand-item" id="btn-Coffee" onclick="setSearchAndFilter('Coffee')">Coffee</div>
-            <div class="brand-item" id="btn-Tea" onclick="setSearchAndFilter('Tea')">Tea</div>
+            <div
+              class="brand-item"
+              id="btn-Matcha"
+              onclick="setSearchAndFilter('Matcha')"
+            >
+              Matcha
+            </div>
+            <div
+              class="brand-item"
+              id="btn-Coffee"
+              onclick="setSearchAndFilter('Coffee')"
+            >
+              Coffee
+            </div>
+            <div
+              class="brand-item"
+              id="btn-Tea"
+              onclick="setSearchAndFilter('Tea')"
+            >
+              Tea
+            </div>
+          </div>
+
+          <!-- Shop Location Display -->
+          <div
+            style="
+              margin-top: 30px;
+              padding: 15px;
+              background: rgba(0, 255, 204, 0.05);
+              border-radius: 12px;
+              border: 1px solid rgba(0, 255, 204, 0.2);
+            "
+          >
+            <h4
+              style="
+                color: var(--accent);
+                margin-bottom: 8px;
+                font-size: 0.85rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                justify-content: center;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+              "
+            >
+              Our Shop Locations
+            </h4>
+            <div style="display: flex; flex-wrap: wrap; gap: 20px">
+              <div style="flex: 1; min-width: 180px; margin-bottom: 15px">
+                <p
+                  style="
+                    margin: 0;
+                    font-size: 0.9rem;
+                    color: #eee;
+                    line-height: 1.4;
+                  "
+                >
+                  123 Barista Street,<br />
+                  Coffee Neighborhood, City 12345
+                </p>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=123+Barista+Street+Coffee+City"
+                  target="_blank"
+                  style="
+                    color: var(--accent);
+                    font-size: 0.85rem;
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    margin-top: 5px;
+                    font-weight: bold;
+                  "
+                >
+                  <span>📍</span> View on Google Maps
+                </a>
+              </div>
+              <div style="flex: 1; min-width: 180px; margin-bottom: 15px">
+                <p
+                  style="
+                    margin: 0;
+                    font-size: 0.9rem;
+                    color: #eee;
+                    line-height: 1.4;
+                  "
+                >
+                  456 Espresso Ave,<br />
+                  Brew Town, City 67890
+                </p>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=456+Espresso+Ave+Brew+Town"
+                  target="_blank"
+                  style="
+                    color: var(--accent);
+                    font-size: 0.85rem;
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    margin-top: 5px;
+                    font-weight: bold;
+                  "
+                >
+                  <span>📍</span> View on Google Maps
+                </a>
+              </div>
+              <div style="flex: 1; min-width: 180px; margin-bottom: 15px">
+                <p
+                  style="
+                    margin: 0;
+                    font-size: 0.9rem;
+                    color: #eee;
+                    line-height: 1.4;
+                  "
+                >
+                  789 Latte Lane,<br />
+                  Foam District, City 11223
+                </p>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=789+Latte+Lane+Foam+District"
+                  target="_blank"
+                  style="
+                    color: var(--accent);
+                    font-size: 0.85rem;
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    margin-top: 5px;
+                    font-weight: bold;
+                  "
+                >
+                  <span>📍</span> View on Google Maps
+                </a>
+              </div>
+            </div>
           </div>
         </aside>
       </div>
     </div>
-
+    <!--<div class="marquee-container">
+      <div class="cool-marquee">
+        MING COFFEE • PREMIUM ROAST • FRESH BREW • BEST QUALITY • SINCE 2024 •
+        MING COFFEE • PREMIUM ROAST • FRESH BREW • BEST QUALITY •&nbsp; MING
+        COFFEE • PREMIUM ROAST • FRESH BREW • BEST QUALITY • SINCE 2024 • MING
+        COFFEE • PREMIUM ROAST • FRESH BREW • BEST QUALITY •&nbsp;
+      </div>
+    </div>-->
     <!--here-->
     <main>
       <div class="moto-gallery product-card">
         <!-- Added class "img-container" here -->
-        <div class="img-container"> 
-          <span class="badge hot-sale">HOT</span>
-          <img src="./Matcha.jpg" alt="Moto">
+        <div class="img-container">
+          <span class="badge discount-badge">20% OFF</span>
+          <span class="badge hot-sale">BEST SELLER</span>
+          <img src="./Matcha.jpg" alt="Moto" />
         </div>
-        
+
         <h1>Matcha Latte</h1>
         <p>$1.25</p>
-        
-        <a href="https://wa.me/85512345678" target="_blank" class="buy-btn" style="text-decoration: none; display: inline-block">
-          CHAT TO BUY
-        </a>
+
+        <button onclick="addToOrder('Matcha Latte', 1.25)" class="buy-btn">
+          ORDER
+        </button>
       </div>
-      
+
       <div class="moto-gallery product-card">
-       <div >
-            <img src="./matcha stt.jpg" alt="Moto">
-       
+        <div class="img-container">
+          <span class="badge hot-sale">BEST SELLER</span>
+          <img src="./matcha stt.jpg" alt="Moto" />
         </div>
-  
+
         <h1>Strawberry Matcha</h1>
         <p>$2.50</p>
-  
-        <a
-          href="https://wa.me/85512345678"
-          target="_blank"
-          class="buy-btn"
-          style="text-decoration: none; display: inline-block"
-        >
-          CHAT TO BUY
-        </a>
+
+        <button onclick="addToOrder('Strawberry Matcha', 2.5)" class="buy-btn">
+          ORDER
+        </button>
       </div>
-     <div class="moto-gallery product-card">
+      <div class="moto-gallery product-card">
         <!-- Added class "img-container" here -->
-        <div class="img-container"> 
-          <span class="badge hot-sale">HOT</span>
-          <img src="./ice latte.jpg" alt="Moto">
+        <div class="img-container">
+          <span class="badge discount-badge">5% OFF</span>
+          <img src="./ice latte.jpg" alt="Moto" />
         </div>
-        
+
         <h1>Ice latte Coffee</h1>
         <p>$1.25</p>
-        
-        <a href="https://wa.me/85512345678" target="_blank" class="buy-btn" style="text-decoration: none; display: inline-block">
-          CHAT TO BUY
-        </a>
+
+        <button onclick="addToOrder('Ice latte Coffee', 1.25)" class="buy-btn">
+          ORDER
+        </button>
       </div>
-       <div class="moto-gallery product-card">
-       <div >
-            <img src="./americano coffee.jpg" alt="Moto">
-       
+      <div class="moto-gallery product-card">
+        <div class="img-container">
+          <img src="./americano coffee.jpg" alt="Moto" />
         </div>
-  
+
         <h1>Ice Americano coffee</h1>
         <p>$1.25</p>
-  
-        <a
-          href="https://wa.me/85512345678"
-          target="_blank"
-          class="buy-btn"
-          style="text-decoration: none; display: inline-block"
-        >
-          CHAT TO BUY
-        </a>
+
+        <button onclick="addToOrder('Americano coffee', 1.25)" class="buy-btn">
+          ORDER
+        </button>
       </div>
-<div class="moto-gallery product-card">
-       <div >
-            <img src="./lemom tea.jpg" alt="Moto">
-       
+      <div class="moto-gallery product-card">
+        <div>
+          <img src="./lemom tea.jpg" alt="Moto" />
         </div>
-  
+
         <h1>Lemon Tea</h1>
         <p>$1.25</p>
-  
-        <a
-          href="https://wa.me/85512345678"
-          target="_blank"
-          class="buy-btn"
-          style="text-decoration: none; display: inline-block"
-        >
-          CHAT TO BUY
-        </a>
+
+        <button onclick="addToOrder('Lemon Tea', 1.25)" class="buy-btn">
+          ORDER
+        </button>
       </div>
-<div class="moto-gallery product-card">
-       <div >
-            <img src="./tea lemon.jpg" alt="Moto">
-       
+      <div class="moto-gallery product-card">
+        <div>
+          <img src="./leemon tea.jpg" alt="Moto" />
         </div>
         <h1>Lemon Tea</h1>
         <p>$1.25</p>
-  
-        <a
-          href="https://wa.me/85512345678"
-          target="_blank"
-          class="buy-btn"
-          style="text-decoration: none; display: inline-block"
-        >
-          CHAT TO BUY
-        </a>
+
+        <button onclick="addToOrder('Lemon Tea High', 1.25)" class="buy-btn">
+          ORDER
+        </button>
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <!--text wrong-->
-<div id="intro-screen">
-    <div class="glitch-wrapper">
-        <h1 class="glitch-text">Chill With Me</h1>
-        <p class="sub-text">Have a Good Day</p>
-        
-
-        <button class="bypass-btn" onclick="closeError()">Click Enter to Buy</button>
-    </div>
     </main>
 
     <script src="./web.js"></script>
