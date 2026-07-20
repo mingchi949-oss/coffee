@@ -1,3 +1,45 @@
+// ============================================
+// MING COFFEE - Enhanced Interactive Features
+// ============================================
+
+// Particle Animation System
+function createParticles() {
+  const particlesContainer = document.getElementById('particles');
+  if (!particlesContainer) return;
+
+  const particleCount = 50;
+
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    
+    // Random position
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.top = Math.random() * 100 + '%';
+    
+    // Random animation delay and duration
+    particle.style.animationDelay = Math.random() * 20 + 's';
+    particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+    
+    // Random size
+    const size = Math.random() * 3 + 1;
+    particle.style.width = size + 'px';
+    particle.style.height = size + 'px';
+    
+    // Random opacity
+    particle.style.opacity = Math.random() * 0.3 + 0.1;
+    
+    particlesContainer.appendChild(particle);
+  }
+}
+
+// Initialize particles on page load
+document.addEventListener('DOMContentLoaded', createParticles);
+
+// ============================================
+// Search & Filter Functions
+// ============================================
+
 function searchBrandsAll() {
   // 1. Get what the customer is typing right now
   const searchInput = document
@@ -23,7 +65,7 @@ function searchBrandsAll() {
   }
 
   // 2. Product Gallery Filtering: Hide/Show items based on search input
-  const products = document.getElementsByClassName("moto-gallery");
+  const products = document.getElementsByClassName("glass-card");
   for (let i = 0; i < products.length; i++) {
     const title = products[i].querySelector("h1");
     if (title) {
@@ -51,54 +93,86 @@ function toggleSocials() {
   document.getElementById("socialLinks").classList.toggle("show");
 }
 
+// ============================================
+// Cart Management System
+// ============================================
+
 let cart = JSON.parse(localStorage.getItem("coffeeCart")) || [];
 
 function updateBadge() {
   const totalQty = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
   const badge = document.getElementById("cart-count");
-  if (badge) badge.innerText = totalQty;
+  if (badge) {
+    badge.innerText = totalQty;
+    
+    // Add pulse animation when cart updates
+    badge.style.animation = 'none';
+    setTimeout(() => {
+      badge.style.animation = 'cart-bounce 0.5s ease';
+    }, 10);
+  }
 }
+
+// Add cart bounce animation
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes cart-bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+  }
+`;
+document.head.appendChild(style);
+
 updateBadge();
 
 function addToOrder(name, price) {
   // Create a cool custom modal instead of browser prompts
   const modalOverlay = document.createElement("div");
-  modalOverlay.style = `
+  modalOverlay.className = 'modal';
+  modalOverlay.style.cssText = `
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85); backdrop-filter: blur(10px);
+    background: rgba(0,0,0,0.9); backdrop-filter: blur(15px);
     display: flex; align-items: center; justify-content: center; z-index: 9999;
+    animation: fadeIn 0.3s ease;
   `;
 
   const modalContent = document.createElement("div");
-  modalContent.style = `
-    background: #111; border: 1px solid var(--accent); padding: 30px;
-    border-radius: 20px; width: 95%; max-width: 450px; text-align: center;
-    box-shadow: 0 0 40px rgba(0, 255, 204, 0.2); font-family: 'Inter', sans-serif;
+  modalContent.className = 'modal-content';
+  modalContent.style.cssText = `
+    background: rgba(17, 17, 17, 0.95); border: 1px solid var(--accent); 
+    padding: 30px; border-radius: 20px; width: 95%; max-width: 450px; 
+    text-align: center; box-shadow: 0 0 60px rgba(0, 255, 204, 0.3);
+    animation: slideUp 0.4s ease;
   `;
 
   modalContent.innerHTML = `
-    <h2 style="margin-bottom: 20px; font-size: 1.5rem; color: #fff;">Order ${name}</h2>
+    <h2 style="margin-bottom: 20px; font-size: 1.5rem; color: #fff; font-weight: 700;">
+      Order ${name}
+    </h2>
     
     <div style="margin-bottom: 20px;">
-      <p style="color: #888; margin-bottom: 10px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Sugar Level</p>
+      <p style="color: rgba(255,255,255,0.6); margin-bottom: 10px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">
+        Sugar Level
+      </p>
       <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
-        <button class="sugar-btn" style="padding: 8px 12px; border: 2px solid #333; background: #222; color: #fff; cursor: pointer; border-radius: 12px; transition: 0.3s; font-weight: bold;">0%</button>
-        <button class="sugar-btn" style="padding: 8px 12px; border: 2px solid #333; background: #222; color: #fff; cursor: pointer; border-radius: 12px; transition: 0.3s; font-weight: bold;">25%</button>
-        <button class="sugar-btn" style="padding: 8px 12px; border: 2px solid var(--accent); background: #222; color: #fff; cursor: pointer; border-radius: 12px; transition: 0.3s; font-weight: bold;">50%</button>
-        <button class="sugar-btn" style="padding: 8px 12px; border: 2px solid #333; background: #222; color: #fff; cursor: pointer; border-radius: 12px; transition: 0.3s; font-weight: bold;">75%</button>
-        <button class="sugar-btn" style="padding: 8px 12px; border: 2px solid #333; background: #222; color: #fff; cursor: pointer; border-radius: 12px; transition: 0.3s; font-weight: bold;">100%</button>
-      
+        <button class="sugar-btn" data-sugar="0%" style="padding: 10px 16px; border: 2px solid #333; background: rgba(255,255,255,0.05); color: #fff; cursor: pointer; border-radius: 12px; transition: all 0.3s; font-weight: 600; backdrop-filter: blur(10px);">0%</button>
+        <button class="sugar-btn" data-sugar="25%" style="padding: 10px 16px; border: 2px solid #333; background: rgba(255,255,255,0.05); color: #fff; cursor: pointer; border-radius: 12px; transition: all 0.3s; font-weight: 600; backdrop-filter: blur(10px);">25%</button>
+        <button class="sugar-btn" data-sugar="50%" style="padding: 10px 16px; border: 2px solid var(--accent); background: rgba(0,255,204,0.1); color: #fff; cursor: pointer; border-radius: 12px; transition: all 0.3s; font-weight: 600; backdrop-filter: blur(10px);">50%</button>
+        <button class="sugar-btn" data-sugar="75%" style="padding: 10px 16px; border: 2px solid #333; background: rgba(255,255,255,0.05); color: #fff; cursor: pointer; border-radius: 12px; transition: all 0.3s; font-weight: 600; backdrop-filter: blur(10px);">75%</button>
+        <button class="sugar-btn" data-sugar="100%" style="padding: 10px 16px; border: 2px solid #333; background: rgba(255,255,255,0.05); color: #fff; cursor: pointer; border-radius: 12px; transition: all 0.3s; font-weight: 600; backdrop-filter: blur(10px);">100%</button>
       </div>
     </div>
 
     <div style="margin-bottom: 25px;">
-      <p style="color: #888; margin-bottom: 10px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Quantity</p>
-      <input type="number" id="order-qty" value="1" min="1" style="width: 80px; padding: 12px; background: #222; border: 1px solid #333; color: #fff; text-align: center; border-radius: 12px; outline: none; font-size: 1.1rem; font-weight: bold;">
+      <p style="color: rgba(255,255,255,0.6); margin-bottom: 10px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">
+        Quantity
+      </p>
+      <input type="number" id="order-qty" value="1" min="1" style="width: 80px; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: #fff; text-align: center; border-radius: 12px; outline: none; font-size: 1.1rem; font-weight: bold; backdrop-filter: blur(10px);">
     </div>
 
     <div style="display: flex; gap: 10px;">
-      <button id="cancel-order" style="flex: 1; padding: 14px; background: #222; color: #888; border: 1px solid #333; border-radius: 12px; cursor: pointer; transition: 0.3s; font-weight: bold;">Cancel</button>
-      <button id="confirm-order" style="flex: 1; padding: 14px; background: var(--accent); color: #000; border: none; border-radius: 12px; font-weight: 900; cursor: pointer; transition: 0.3s; text-transform: uppercase;">Add to Cart</button>
+      <button id="cancel-order" style="flex: 1; padding: 14px; background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; cursor: pointer; transition: all 0.3s; font-weight: 600; backdrop-filter: blur(10px);">Cancel</button>
+      <button id="confirm-order" style="flex: 1; padding: 14px; background: linear-gradient(135deg, var(--accent), #00ccff); color: #000; border: none; border-radius: 12px; font-weight: 900; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px;">Add to Cart</button>
     </div>
   `;
 
@@ -107,19 +181,44 @@ function addToOrder(name, price) {
 
   let selectedSugar = "50%"; // Default selection
   const sugarBtns = modalContent.querySelectorAll(".sugar-btn");
+  
   sugarBtns.forEach(btn => {
-    if (btn.innerText === selectedSugar) {
-      btn.style.borderColor = "var(--accent)"; // Highlight default
-    }
+    // Add hover effects
+    btn.addEventListener('mouseenter', function() {
+      if (this.dataset.sugar !== selectedSugar) {
+        this.style.borderColor = 'rgba(0, 255, 204, 0.5)';
+        this.style.background = 'rgba(0, 255, 204, 0.05)';
+      }
+    });
+    
+    btn.addEventListener('mouseleave', function() {
+      if (this.dataset.sugar !== selectedSugar) {
+        this.style.borderColor = '#333';
+        this.style.background = 'rgba(255,255,255,0.05)';
+      }
+    });
+    
     btn.onclick = () => {
-      sugarBtns.forEach(b => b.style.borderColor = "#333"); // Reset all
-      btn.style.borderColor = "var(--accent)"; // Highlight selected
-      selectedSugar = btn.innerText;
+      // Reset all buttons
+      sugarBtns.forEach(b => {
+        b.style.borderColor = '#333';
+        b.style.background = 'rgba(255,255,255,0.05)';
+      });
+      
+      // Highlight selected
+      btn.style.borderColor = 'var(--accent)';
+      btn.style.background = 'rgba(0,255,204,0.1)';
+      selectedSugar = btn.dataset.sugar;
     };
   });
 
-  document.getElementById("cancel-order").onclick = () => modalOverlay.remove();
+  // Cancel button
+  document.getElementById("cancel-order").onclick = () => {
+    modalOverlay.style.animation = 'fadeOut 0.3s ease';
+    setTimeout(() => modalOverlay.remove(), 300);
+  };
 
+  // Confirm button
   document.getElementById("confirm-order").onclick = () => {
     const qty = parseInt(document.getElementById("order-qty").value) || 1;
     
@@ -132,10 +231,102 @@ function addToOrder(name, price) {
 
     localStorage.setItem("coffeeCart", JSON.stringify(cart));
     updateBadge();
-    modalOverlay.remove();
-    console.log(`%c Added ${qty}x ${name} to cart!`, "color: #00ffcc; font-weight: bold;");
+    
+    // Success animation
+    modalOverlay.style.animation = 'fadeOut 0.3s ease';
+    setTimeout(() => modalOverlay.remove(), 300);
+    
+    // Show success feedback
+    showSuccessNotification(`${qty}x ${name} added to cart!`);
   };
+
+  // Close on overlay click
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) {
+      modalOverlay.style.animation = 'fadeOut 0.3s ease';
+      setTimeout(() => modalOverlay.remove(), 300);
+    }
+  });
 }
+
+// Success Notification
+function showSuccessNotification(message) {
+  const notification = document.createElement('div');
+  notification.style.cssText = `
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    background: linear-gradient(135deg, var(--accent), #00ccff);
+    color: #000;
+    padding: 16px 24px;
+    border-radius: 12px;
+    font-weight: 700;
+    box-shadow: 0 10px 30px rgba(0, 255, 204, 0.4);
+    z-index: 10000;
+    animation: slideInRight 0.5s ease;
+    font-family: 'Inter', sans-serif;
+  `;
+  notification.textContent = message;
+  
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.style.animation = 'slideOutRight 0.5s ease';
+    setTimeout(() => notification.remove(), 500);
+  }, 3000);
+}
+
+// Add notification animations
+const notificationStyle = document.createElement('style');
+notificationStyle.textContent = `
+  @keyframes slideInRight {
+    from {
+      transform: translateX(400px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideOutRight {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(400px);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  
+  @keyframes slideUp {
+    from {
+      transform: translateY(50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+`;
+document.head.appendChild(notificationStyle);
+
+// ============================================
+// Cart UI Functions
+// ============================================
 
 function updateCartUI() {
   document.getElementById("cart-count").innerText = cart.length;
@@ -155,7 +346,7 @@ function updateCartUI() {
       total += item.price;
     });
   }
-  itemsContainer.innerHTML = html || "<p>Your cart is empty.</p>";
+  itemsContainer.innerHTML = html || "<p style='text-align: center; color: rgba(255,255,255,0.5);'>Your cart is empty.</p>";
   totalElement.innerText = total.toFixed(2);
 }
 
@@ -183,22 +374,26 @@ window.onclick = function (event) {
 
 function removeItem(index) {
   cart.splice(index, 1); // Remove 1 item at the given index
+  localStorage.setItem("coffeeCart", JSON.stringify(cart));
   updateCartUI(); // Refresh the cart display
+  updateBadge();
 }
 
 function checkout() {
-  if (cart.length === 0) return alert("Your cart is empty!");
+  if (cart.length === 0) {
+    showSuccessNotification('Your cart is empty!');
+    return;
+  }
 
   let whatsappMessage = "New Order from Website:%0A";
-  let telegramMessageContent = "New Order from Website:\n"; // Using \n for Telegram
+  let telegramMessageContent = "New Order from Website:\n";
   let total = 0;
 
   cart.forEach((item) => {
     const itemDetails = `- ${item.name} (${item.sugar} sugar) ($${item.price.toFixed(2)})`;
     whatsappMessage += itemDetails + "%0A";
-    telegramMessageContent += itemDetails + "\n"; // Append to Telegram message
+    telegramMessageContent += itemDetails + "\n";
     total += item.price;
-    // Logs order details to your private backend database
     trackOrder(item.name, item.price);
   });
 
@@ -213,13 +408,15 @@ function checkout() {
 
   // Immediately clear the cart and UI to keep order details private
   cart = [];
+  localStorage.removeItem("coffeeCart");
   updateCartUI();
+  updateBadge();
   closeCart();
+  
+  showSuccessNotification('Order placed successfully!');
 }
 
 function sendOrderToTelegram(messageContent, orderTotal) {
-  // This function sends the order details to your backend, which then forwards it to Telegram.
-  // Your backend endpoint (/api/send-telegram-message) needs to be implemented.
   const fullMessage = messageContent + `Total: $${orderTotal.toFixed(2)}`;
   fetch("/api/send-telegram-message", {
     method: "POST",
@@ -236,22 +433,86 @@ function sendOrderToTelegram(messageContent, orderTotal) {
     );
 }
 
+// ============================================
+// Gallery Functions
+// ============================================
+
 function openGallery() {
   document.getElementById("lightbox").style.display = "flex";
-
-  currentXP += 10;
-
-  document.getElementById("xp-display").innerText = currentXP;
-
-  let percentage = (currentXP / 1000) * 100;
-  document.querySelector(".xp-bar-fill").style.width = percentage + "%";
 }
+
 function swap(imgSrc) {
   document.getElementById("currentView").src = imgSrc;
-
+  
   const main = document.getElementById("currentView");
   main.style.opacity = 0;
   setTimeout(() => {
     main.style.opacity = 1;
   }, 50);
 }
+
+// ============================================
+// Scroll Animations
+// ============================================
+
+// Add scroll reveal animation
+function revealOnScroll() {
+  const elements = document.querySelectorAll('.glass-card, .glass-sidebar');
+  
+  elements.forEach(element => {
+    const elementTop = element.getBoundingClientRect().top;
+    const elementBottom = element.getBoundingClientRect().bottom;
+    
+    if (elementTop < window.innerHeight && elementBottom > 0) {
+      element.style.opacity = '1';
+      element.style.transform = 'translateY(0)';
+    }
+  });
+}
+
+// Initialize scroll reveal
+window.addEventListener('scroll', revealOnScroll);
+
+// ============================================
+// Smooth Scroll for Navigation
+// ============================================
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+// ============================================
+// Initialize on Page Load
+// ============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Add fade-in animation to cards
+  const cards = document.querySelectorAll('.glass-card');
+  cards.forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+    
+    setTimeout(() => {
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }, index * 100);
+  });
+  
+  // Initialize cart from localStorage
+  updateBadge();
+  
+  console.log('%c☕ MING COFFEE %cReady to serve!', 
+    'color: #00ffcc; font-size: 20px; font-weight: bold;', 
+    'color: #fff; font-size: 14px;'
+  );
+});
