@@ -291,7 +291,7 @@ document
     cart.forEach((item) => {
       const cost = item.price * item.qty;
       totalCost += cost;
-      itemsText += `☕ ${item.qty}x *${item.name}* (${item.sugar || "100%"}) - $${cost.toFixed(2)}\n`;
+      itemsText += `☕ ${item.qty}x ${item.name} (${item.sugar || "100%"}) - $${cost.toFixed(2)}\n`;
     });
 
     const orderSummary = cart
@@ -302,15 +302,18 @@ document
     const botToken = "8749837452:AAF_TCGDTvgK4bLXBIoM4eQLjxv27Rxcksw";
     const chatId = "-5249856765";
 
-    // Create the Telegram text string
+    // Create the Telegram text string - SUPER COOL STYLE
     const message =
-      `🚨 *NEW COFFEE ORDER* 🚨\n\n` +
+      `*📱 CUSTOMER INFORMATION*\n` +
+      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
       `📞 *Phone:* ${phone}\n` +
-      `📍 *Location:* ${location}\n\n` +
+      `📍 *Location:* ${location}\n` +
       `💬 *Comment:* ${comment || "None"}\n\n` +
-      `🛍️ *Items Ordered:*\n${itemsText}\n` +
-      `💰 *Total Bill:* $${totalCost.toFixed(2)}\n` +
-      `⏰ *Status:* Preparing...`;
+      `*🛍️ ORDER ITEMS*\n` +
+      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+      `${itemsText}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+      `💰 *TOTAL BILL:* $${totalCost.toFixed(2)}\n` +
+      `⏰ *STATUS:* Preparing...`;
 
     // Send the order to Telegram
     const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;

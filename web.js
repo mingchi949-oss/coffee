@@ -491,10 +491,98 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ============================================
+// Star Rating System
+// ============================================
+
+function initRatingSystem() {
+  const ratingContainers = document.querySelectorAll('.rating-container');
+  
+  ratingContainers.forEach(container => {
+    const stars = container.querySelectorAll('.star');
+    const ratingText = container.querySelector('.rating-text');
+    const productName = container.dataset.product;
+    
+    // Load saved rating from localStorage
+    const savedRating = localStorage.getItem(`rating_${productName}`);
+    if (savedRating) {
+      updateStarDisplay(stars, parseInt(savedRating));
+      ratingText.textContent = `${savedRating}/5`;
+      container.classList.add('rated');
+    }
+    
+    // Add click event to each star
+    stars.forEach(star => {
+      star.addEventListener('click', function() {
+        const rating = parseInt(this.dataset.rating);
+        
+        // Save rating to localStorage
+        localStorage.setItem(`rating_${productName}`, rating);
+        
+        // Update display
+        updateStarDisplay(stars, rating);
+        ratingText.textContent = `${rating}/5`;
+        container.classList.add('rated');
+        
+        // Add a brief animation
+        this.style.transform = 'scale(1.4)';
+        setTimeout(() => {
+          this.style.transform = 'scale(1)';
+        }, 200);
+      });
+      
+      // Hover effect
+      star.addEventListener('mouseenter', function() {
+        const rating = parseInt(this.dataset.rating);
+        highlightStars(stars, rating);
+      });
+      
+      star.addEventListener('mouseleave', function() {
+        const savedRating = localStorage.getItem(`rating_${productName}`);
+        if (savedRating) {
+          updateStarDisplay(stars, parseInt(savedRating));
+        } else {
+          clearStars(stars);
+        }
+      });
+    });
+  });
+}
+
+function updateStarDisplay(stars, rating) {
+  stars.forEach((star, index) => {
+    if (index < rating) {
+      star.classList.add('active');
+      star.classList.remove('hover');
+    } else {
+      star.classList.remove('active', 'hover');
+    }
+  });
+}
+
+function highlightStars(stars, rating) {
+  stars.forEach((star, index) => {
+    if (index < rating) {
+      star.classList.add('hover');
+    } else {
+      star.classList.remove('hover');
+    }
+  });
+}
+
+function clearStars(stars) {
+  stars.forEach(star => {
+    star.classList.remove('active', 'hover');
+  });
+}
+
+// ============================================
 // Initialize on Page Load
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
+  // Initialize rating system
+  initRatingSystem();
+  
   // Add fade-in animation to cards
   const cards = document.querySelectorAll('.glass-card');
   cards.forEach((card, index) => {
