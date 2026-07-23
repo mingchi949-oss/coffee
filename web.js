@@ -99,31 +99,21 @@ function toggleSocials() {
 
 let cart = JSON.parse(localStorage.getItem("coffeeCart")) || [];
 
-function updateBadge() {
-  const totalQty = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
-  const badge = document.getElementById("cart-count");
-  if (badge) {
-    badge.innerText = totalQty;
+
+// Update cart count badge
+function updateCartCount() {
+  const cartCountElement = document.getElementById("cart-count");
+  if (cartCountElement) {
+    const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+    cartCountElement.textContent = totalItems;
     
-    // Add pulse animation when cart updates
-    badge.style.animation = 'none';
+    // Add animation effect
+    cartCountElement.style.transform = 'scale(1.3)';
     setTimeout(() => {
-      badge.style.animation = 'cart-bounce 0.5s ease';
-    }, 10);
+      cartCountElement.style.transform = 'scale(1)';
+    }, 200);
   }
 }
-
-// Add cart bounce animation
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes cart-bounce {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.3); }
-  }
-`;
-document.head.appendChild(style);
-
-updateBadge();
 
 function addToOrder(name, price) {
   // Create a cool custom modal instead of browser prompts
@@ -150,6 +140,16 @@ function addToOrder(name, price) {
       Order ${name}
     </h2>
     
+    <div style="margin-bottom: 20px;">
+      <p style="color: rgba(255,255,255,0.6); margin-bottom: 10px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">
+        Size
+      </p>
+      <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+        <button class="size-btn" data-size="M" style="padding: 10px 24px; border: 2px solid #333; background: rgba(255,255,255,0.05); color: #fff; cursor: pointer; border-radius: 12px; transition: all 0.3s; font-weight: 600; backdrop-filter: blur(10px);">M <span style="font-size: 0.75rem; opacity: 0.7;">(+$0.25)</span></button>
+        <button class="size-btn" data-size="L" style="padding: 10px 24px; border: 2px solid var(--accent); background: rgba(0,255,204,0.1); color: #fff; cursor: pointer; border-radius: 12px; transition: all 0.3s; font-weight: 600; backdrop-filter: blur(10px);">L</button>
+      </div>
+    </div>
+
     <div style="margin-bottom: 20px;">
       <p style="color: rgba(255,255,255,0.6); margin-bottom: 10px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">
         Sugar Level
@@ -179,7 +179,37 @@ function addToOrder(name, price) {
   modalOverlay.appendChild(modalContent);
   document.body.appendChild(modalOverlay);
 
+  let selectedSize = "L"; // Default selection
   let selectedSugar = "50%"; // Default selection
+  
+  const sizeBtns = modalContent.querySelectorAll(".size-btn");
+  sizeBtns.forEach(btn => {
+    btn.addEventListener('mouseenter', function() {
+      if (this.dataset.size !== selectedSize) {
+        this.style.borderColor = 'rgba(0, 255, 204, 0.5)';
+        this.style.background = 'rgba(0, 255, 204, 0.05)';
+      }
+    });
+    
+    btn.addEventListener('mouseleave', function() {
+      if (this.dataset.size !== selectedSize) {
+        this.style.borderColor = '#333';
+        this.style.background = 'rgba(255,255,255,0.05)';
+      }
+    });
+    
+    btn.onclick = () => {
+      sizeBtns.forEach(b => {
+        b.style.borderColor = '#333';
+        b.style.background = 'rgba(255,255,255,0.05)';
+      });
+      
+      btn.style.borderColor = 'var(--accent)';
+      btn.style.background = 'rgba(0,255,204,0.1)';
+      selectedSize = btn.dataset.size;
+    };
+  });
+  
   const sugarBtns = modalContent.querySelectorAll(".sugar-btn");
   
   sugarBtns.forEach(btn => {
@@ -222,22 +252,30 @@ function addToOrder(name, price) {
   document.getElementById("confirm-order").onclick = () => {
     const qty = parseInt(document.getElementById("order-qty").value) || 1;
     
-    const existingItem = cart.find(item => item.name === name && item.sugar === selectedSugar);
+    // Add $0.25 surcharge for size M
+    let finalPrice = price;
+    if (selectedSize === "M") {
+      finalPrice = price + 0.25;
+    }
+    
+    const existingItem = cart.find(item => item.name === name && item.sugar === selectedSugar && item.size === selectedSize);
     if (existingItem) {
       existingItem.qty += qty;
     } else {
-      cart.push({ name, price, qty, sugar: selectedSugar });
+      cart.push({ name, price: finalPrice, qty, sugar: selectedSugar, size: selectedSize });
     }
 
     localStorage.setItem("coffeeCart", JSON.stringify(cart));
-    updateBadge();
+    
+    // Update cart count
+    updateCartCount();
     
     // Success animation
     modalOverlay.style.animation = 'fadeOut 0.3s ease';
     setTimeout(() => modalOverlay.remove(), 300);
     
     // Show success feedback
-    showSuccessNotification(`${qty}x ${name} added to cart!`);
+    showSuccessNotification(`${qty}x ${name} (${selectedSize}) added to cart!`);
   };
 
   // Close on overlay click
@@ -329,7 +367,6 @@ document.head.appendChild(notificationStyle);
 // ============================================
 
 function updateCartUI() {
-  document.getElementById("cart-count").innerText = cart.length;
   const itemsContainer = document.getElementById("cart-items");
   const totalElement = document.getElementById("cart-total");
 
@@ -339,7 +376,7 @@ function updateCartUI() {
     cart.forEach((item, index) => {
       html += `
         <div class="cart-item-row">
-          <p>${item.name} (${item.sugar} sugar) - $${item.price.toFixed(2)}</p>
+          <p>${item.name} (${item.size}) (${item.sugar} sugar) - $${item.price.toFixed(2)}</p>
           <button class="remove-item-btn" onclick="removeItem(${index})">x</button>
         </div>
       `;
@@ -376,7 +413,7 @@ function removeItem(index) {
   cart.splice(index, 1); // Remove 1 item at the given index
   localStorage.setItem("coffeeCart", JSON.stringify(cart));
   updateCartUI(); // Refresh the cart display
-  updateBadge();
+  updateCartCount(); // Update cart count badge
 }
 
 function checkout() {
@@ -384,13 +421,16 @@ function checkout() {
     showSuccessNotification('Your cart is empty!');
     return;
   }
+  
+  // Clear cart count
+  updateCartCount();
 
   let whatsappMessage = "New Order from Website:%0A";
   let telegramMessageContent = "New Order from Website:\n";
   let total = 0;
 
   cart.forEach((item) => {
-    const itemDetails = `- ${item.name} (${item.sugar} sugar) ($${item.price.toFixed(2)})`;
+    const itemDetails = `- ${item.name} (${item.size}) (${item.sugar} sugar) ($${item.price.toFixed(2)})`;
     whatsappMessage += itemDetails + "%0A";
     telegramMessageContent += itemDetails + "\n";
     total += item.price;
@@ -410,7 +450,6 @@ function checkout() {
   cart = [];
   localStorage.removeItem("coffeeCart");
   updateCartUI();
-  updateBadge();
   closeCart();
   
   showSuccessNotification('Order placed successfully!');
@@ -580,6 +619,9 @@ function clearStars(stars) {
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
+  // Initialize cart count on page load
+  updateCartCount();
+  
   // Initialize rating system
   initRatingSystem();
   
@@ -595,9 +637,6 @@ document.addEventListener('DOMContentLoaded', function() {
       card.style.transform = 'translateY(0)';
     }, index * 100);
   });
-  
-  // Initialize cart from localStorage
-  updateBadge();
   
   console.log('%c☕ MING COFFEE %cReady to serve!', 
     'color: #00ffcc; font-size: 20px; font-weight: bold;', 
