@@ -647,7 +647,7 @@ body::before {
 }
 
 .tt .social-logo {
-  fill: #fff;
+  fill: #000000;
 }
 
 .tt:hover .social-logo {
