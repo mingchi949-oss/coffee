@@ -888,7 +888,7 @@ body::before {
 /* Products Grid */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   padding: 20px 30px 30px;
   max-width: 1400px;
@@ -1045,7 +1045,7 @@ body::before {
 
 .product-card img {
   width: 100%;
-  height: 180px;
+  height: 240px;
   object-fit: cover;
   transition: all 0.5s;
 }
@@ -2129,6 +2129,11 @@ select.form-input {
   .card-header h2 {
     font-size: 1.3rem;
   }
+
+  .product-info h1 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2137,7 +2142,7 @@ select.form-input {
   }
 
   .products-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
