@@ -638,8 +638,34 @@ document.addEventListener('DOMContentLoaded', function() {
     }, index * 100);
   });
   
-  console.log('%c☕ MING COFFEE %cReady to serve!', 
-    'color: #00ffcc; font-size: 20px; font-weight: bold;', 
-    'color: #fff; font-size: 14px;'
+  console.log('%c☕ DESERT COCO %cReady to serve!', 
+    'color: #ffd700; font-size: 20px; font-weight: bold;', 
+    'color: #ff6b35; font-size: 14px;'
   );
 });
+
+// ============================================
+// Footer Interactive Features
+// ============================================
+
+function handleFooterNewsletter(form) {
+  const input = form.querySelector('.newsletter-input');
+  const feedback = form.querySelector('.newsletter-feedback');
+  if (!input || !feedback) return;
+
+  const email = input.value.trim();
+  if (email) {
+    feedback.innerHTML = '<span style="color: #ffd700; display: inline-flex; align-items: center; gap: 6px; margin-top: 6px;"><i class="fas fa-check-circle"></i> Thanks for joining Desert Club! ☕</span>';
+    input.value = '';
+    setTimeout(() => {
+      feedback.innerHTML = '';
+    }, 4500);
+  }
+}
+
+function scrollToTopFooter() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}

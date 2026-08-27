@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MING Coffee - Premium Beverages</title>
     <link rel="stylesheet" href="./webstyle.css" />
+    <link rel="stylesheet" href="./footer.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap"
       rel="stylesheet"
@@ -33,22 +34,12 @@
         <div class="logo">
           <i class="fas fa-mug-hot"></i> DESERT<span>COCO</span>
         </div>
-        <div class="social-links">
-          <a href="https://facebook.com" target="_blank" class="social-icon fb">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="https://t.me" target="_blank" class="social-icon tg">
-            <i class="fab fa-telegram-plane"></i>
-          </a>
-          <a href="https://instagram.com" target="_blank" class="social-icon ig">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="https://www.tiktok.com" target="_blank" class="social-icon tt">
-            <i class="fab fa-tiktok"></i>
-          </a>
-          <a href="./order.html" class="social-icon cart-btn">
-            <i class="fas fa-clipboard-list"></i>
-            <span>Your Order</span>
+        <div class="nav-actions">
+          <a href="./order.html" class="nav-order-btn cart-btn">
+            <span class="cart-icon-box">
+              <i class="fas fa-shopping-bag"></i>
+            </span>
+            <span class="cart-label">Your Order</span>
             <span class="cart-count" id="cart-count">0</span>
           </a>
         </div>
@@ -311,10 +302,124 @@
       </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-content">
-        <p>&copy; 2026 MING Coffee. All rights reserved.</p>
+    <!-- Main Footer -->
+    <footer class="desert-footer">
+      <div class="footer-top-accent"></div>
+      <div class="footer-container">
+        <div class="footer-grid">
+          <!-- Brand & Bio -->
+          <div class="footer-col brand-col">
+            <div class="footer-logo">
+              <i class="fas fa-mug-hot"></i>
+              <span class="brand-text">DESERT<span>COCO</span></span>
+            </div>
+            <p class="footer-tagline">
+              Crafted under the golden desert sun. Specialty beans, ceremonial matcha, and signature iced infusions brewed to perfection.
+            </p>
+            
+            <div class="store-status">
+              <span class="status-indicator"></span>
+              <span class="status-text">Open Daily &bull; 7:00 AM – 9:00 PM</span>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="footer-col">
+            <h4 class="footer-heading"><i class="fas fa-compass"></i> Quick Links</h4>
+            <ul class="footer-links-list">
+              <li><a href="./HOME.html"><i class="fas fa-angle-right"></i> Home</a></li>
+              <li><a href="./web.html"><i class="fas fa-angle-right"></i> Menu & Products</a></li>
+              <li><a href="./about.html"><i class="fas fa-angle-right"></i> Our Story & Mission</a></li>
+              <li><a href="./aboutdev.html"><i class="fas fa-angle-right"></i> Development Team</a></li>
+              <li><a href="./contact.html"><i class="fas fa-angle-right"></i> Contact & Locations</a></li>
+            </ul>
+          </div>
+
+          <!-- Popular Drinks & Specials -->
+          <div class="footer-col">
+            <h4 class="footer-heading"><i class="fas fa-fire-flame-curved"></i> Popular Drinks</h4>
+            <ul class="footer-drinks-list">
+              <li>
+                <a href="./web.html">
+                  <span class="drink-name">Matcha Green Tea</span>
+                  <span class="drink-badge">$1.25</span>
+                </a>
+              </li>
+              <li>
+                <a href="./web.html">
+                  <span class="drink-name">Americano Coffee</span>
+                  <span class="drink-badge">$1.25</span>
+                </a>
+              </li>
+              <li>
+                <a href="./web.html">
+                  <span class="drink-name">Signature Ice Latte</span>
+                  <span class="drink-badge">$1.25</span>
+                </a>
+              </li>
+              <li>
+                <a href="./web.html">
+                  <span class="drink-name">Lemon Tea High</span>
+                  <span class="drink-badge">$1.25</span>
+                </a>
+              </li>
+            </ul>
+
+            <div class="footer-hours-card">
+              <i class="far fa-clock"></i>
+              <div>
+                <strong>Happy Hour Special</strong>
+                <p>2:00 PM – 5:00 PM (Daily Discount)</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Newsletter & Contact -->
+          <div class="footer-col newsletter-col">
+            <h4 class="footer-heading"><i class="fas fa-envelope-open-text"></i> Desert Club</h4>
+            <p class="newsletter-desc">Subscribe to receive secret recipes, tasting invites, and exclusive offers.</p>
+            
+            <form class="footer-newsletter-form" onsubmit="event.preventDefault(); handleFooterNewsletter(this);">
+              <div class="newsletter-input-group">
+                <i class="far fa-envelope mail-icon"></i>
+                <input type="email" placeholder="Your email address..." required class="newsletter-input" />
+                <button type="submit" class="newsletter-btn" aria-label="Subscribe">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+              <div class="newsletter-feedback"></div>
+            </form>
+
+            <div class="footer-contact-info">
+              <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <span>+855 (0) 12 345 678</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Sisowat & Jatokmuk, Phnom Penh</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Bottom Bar -->
+        <div class="footer-bottom">
+          <div class="footer-bottom-flex">
+            <p class="copyright-text">
+              &copy; 2026 <span>DESERT COCO</span>. All rights reserved.
+            </p>
+            <div class="footer-tagline-center">
+              <span>Brewed with Passion & Desert Spirit</span>
+              <span class="heart-icon">☕✨</span>
+            </div>
+            <div class="footer-bottom-actions">
+              <button onclick="scrollToTopFooter()" class="back-to-top-btn" title="Back to top">
+                <span>Top</span>
+                <i class="fas fa-arrow-up"></i>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

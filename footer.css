@@ -1,0 +1,545 @@
+/* ============================================
+   DESERT COCO - Premium Global Footer Styling
+   ============================================ */
+
+.desert-footer {
+  position: relative;
+  z-index: 10;
+  background: linear-gradient(180deg, rgba(22, 17, 12, 0.94) 0%, rgba(12, 9, 6, 0.98) 100%);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-top: 1px solid rgba(255, 107, 53, 0.25);
+  color: #f3f3f3;
+  margin-top: 80px;
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Glowing Top Border Accent */
+.footer-top-accent {
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 107, 53, 0.4) 20%, #ff6b35 40%, #ffd700 50%, #ff6b35 60%, rgba(255, 107, 53, 0.4) 80%, transparent 100%);
+  box-shadow: 0 0 15px rgba(255, 107, 53, 0.6), 0 0 30px rgba(255, 215, 0, 0.3);
+  position: relative;
+}
+
+.desert-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 107, 53, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.footer-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 60px 24px 25px;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1.1fr 1.3fr;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+/* Column 1: Brand & Bio */
+.brand-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.footer-logo i {
+  color: #ff6b35;
+  font-size: 26px;
+  filter: drop-shadow(0 0 8px rgba(255, 107, 53, 0.6));
+  animation: floatFooterIcon 3s ease-in-out infinite alternate;
+}
+
+@keyframes floatFooterIcon {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
+}
+
+.brand-text {
+  color: #ffffff;
+}
+
+.brand-text span {
+  color: #ffd700;
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+}
+
+.footer-tagline {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0;
+}
+
+/* Store Status Pill */
+.store-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 107, 53, 0.25);
+  padding: 8px 16px;
+  border-radius: 30px;
+  width: fit-content;
+  backdrop-filter: blur(10px);
+}
+
+.status-indicator {
+  width: 9px;
+  height: 9px;
+  background-color: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #10b981;
+  animation: pulseGreen 2s infinite;
+}
+
+@keyframes pulseGreen {
+  0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 10px #10b981; }
+  50% { opacity: 0.5; transform: scale(1.2); box-shadow: 0 0 16px #10b981; }
+}
+
+.status-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.88);
+  letter-spacing: 0.3px;
+}
+
+/* Social Buttons */
+.footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.f-social {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  text-decoration: none;
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.f-social:hover {
+  transform: translateY(-4px) scale(1.08);
+  color: #fff;
+  border-color: #ffd700;
+}
+
+.f-social.fb:hover { background: #1877f2; box-shadow: 0 6px 20px rgba(24, 119, 242, 0.4); }
+.f-social.tg:hover { background: #229ed9; box-shadow: 0 6px 20px rgba(34, 158, 217, 0.4); }
+.f-social.ig:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); box-shadow: 0 6px 20px rgba(220, 39, 67, 0.4); }
+.f-social.tt:hover { background: #000000; border-color: #00f2fe; box-shadow: 0 6px 20px rgba(0, 242, 254, 0.4); }
+
+/* Column Headings */
+.footer-heading {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 22px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.footer-heading i {
+  color: #ff6b35;
+  font-size: 15px;
+}
+
+.footer-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 32px;
+  height: 2px;
+  background: linear-gradient(90deg, #ff6b35, #ffd700);
+  border-radius: 2px;
+}
+
+/* Column 2: Navigation Links */
+.footer-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-links-list li a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+}
+
+.footer-links-list li a i {
+  font-size: 11px;
+  color: #ffd700;
+  transition: transform 0.25s ease;
+}
+
+.footer-links-list li a:hover {
+  color: #ffd700;
+  transform: translateX(6px);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.footer-links-list li a:hover i {
+  transform: translateX(3px);
+}
+
+/* Column 3: Popular Drinks & Specials */
+.footer-drinks-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-drinks-list li a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  padding: 7px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.25s ease;
+}
+
+.footer-drinks-list li a:hover {
+  background: rgba(255, 107, 53, 0.12);
+  border-color: rgba(255, 107, 53, 0.35);
+  transform: translateX(4px);
+}
+
+.drink-name {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+}
+
+.drink-badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffd700;
+  background: rgba(255, 215, 0, 0.15);
+  padding: 2px 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.footer-hours-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+  border: 1px solid rgba(255, 107, 53, 0.25);
+}
+
+.footer-hours-card i {
+  font-size: 20px;
+  color: #ff6b35;
+}
+
+.footer-hours-card strong {
+  display: block;
+  font-size: 13px;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.footer-hours-card p {
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+}
+
+/* Column 4: Newsletter & Contact */
+.newsletter-desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 14px;
+}
+
+.newsletter-input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.mail-icon {
+  position: absolute;
+  left: 14px;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.newsletter-input {
+  width: 100%;
+  padding: 11px 46px 11px 38px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  border-radius: 30px;
+  color: #fff;
+  font-size: 13px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.newsletter-input:focus {
+  border-color: #ffd700;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.25);
+}
+
+.newsletter-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.newsletter-btn {
+  position: absolute;
+  right: 4px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #ff6b35, #ffd700);
+  color: #1a1a1a;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+.newsletter-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 18px rgba(255, 107, 53, 0.6);
+  color: #000;
+}
+
+.newsletter-feedback {
+  min-height: 18px;
+  font-size: 12.5px;
+}
+
+.footer-contact-info {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.contact-item i {
+  color: #ff6b35;
+  font-size: 13px;
+  width: 16px;
+  text-align: center;
+}
+
+/* Footer Bottom Bar */
+.footer-bottom {
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-bottom-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.copyright-text {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+.copyright-text span {
+  color: #ffd700;
+  font-weight: 600;
+}
+
+.footer-tagline-center {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.heart-icon {
+  display: inline-block;
+  animation: pulseCoffee 2s ease-in-out infinite;
+}
+
+@keyframes pulseCoffee {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.back-to-top-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  color: #ffd700;
+  padding: 7px 16px;
+  border-radius: 20px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: all 0.3s ease;
+}
+
+.back-to-top-btn:hover {
+  background: linear-gradient(135deg, #ff6b35, #ffd700);
+  color: #1a1a1a;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+}
+
+.back-to-top-btn i {
+  transition: transform 0.3s ease;
+}
+
+.back-to-top-btn:hover i {
+  transform: translateY(-2px);
+}
+
+/* Backward compatibility aliases */
+footer.footer, footer.end {
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+}
+
+@media (max-width: 680px) {
+  .desert-footer {
+    margin-top: 50px;
+  }
+
+  .footer-container {
+    padding: 40px 16px 20px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-bottom: 36px;
+  }
+
+  .brand-col {
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-heading::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .footer-heading {
+    justify-content: center;
+  }
+
+  .footer-links-list {
+    align-items: center;
+  }
+
+  .footer-drinks-list li a {
+    justify-content: space-between;
+  }
+
+  .newsletter-col {
+    text-align: center;
+  }
+
+  .footer-contact-info {
+    align-items: center;
+  }
+
+  .footer-bottom-flex {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+}
+
